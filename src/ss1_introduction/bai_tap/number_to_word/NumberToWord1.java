@@ -7,6 +7,8 @@ public class NumberToWord1 {
         System.out.println("Enter a number: ");
         Scanner scanner=new Scanner(System.in);
         int number=scanner.nextInt();
+        int hundreds=number/100;
+        int tens=(number%100);
 
     }
 }

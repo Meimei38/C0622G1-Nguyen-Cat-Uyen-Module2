@@ -17,36 +17,52 @@ public class Fan {
     }
 
 
-    private Fan(int speed, boolean status, double radius, String color) {
-        this.speed = speed;
-        this.status = status;
-        this.radius = radius;
-        this.color = color;
-
-    }
-
     public int getSpeed() {
         return this.speed;
 
     }
 
-    public boolean getIsOn() {
-        return true;
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public double getRadius() {
+        return this.radius;
+
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public String getColor() {
+        return this.color;
+
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public void setStatus(boolean status){
+        this.status=status;
+    }
+
+    public boolean getStatus(){
+        return this.status;
     }
 
 
     @Override
     public String toString() {
-        if (getIsOn()) {
-            return "Fan{" +
+        if (getStatus()) {
+            return "Fan is on " +
+                    "Fan{" +
                     "speed=" + speed +
-                    ", status=" + status +
-                    ", radius=" + radius +
                     ", color='" + color + '\'' +
                     '}';
         } else {
-            return "Fan{" +
-                    "status=" + status +
+            return "Fan is off " +
+                    "Fan{" +
                     ", radius=" + radius +
                     ", color='" + color + '\'' +
                     '}';

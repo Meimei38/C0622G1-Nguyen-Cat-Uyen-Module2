@@ -43,11 +43,12 @@ public class Fan {
     public void setColor(String color) {
         this.color = color;
     }
-    public void setStatus(boolean status){
-        this.status=status;
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return this.status;
     }
 
@@ -63,7 +64,7 @@ public class Fan {
         } else {
             return "Fan is off " +
                     "Fan{" +
-                    ", radius=" + radius +
+                    "radius=" + radius +
                     ", color='" + color + '\'' +
                     '}';
         }

@@ -18,7 +18,6 @@ public class FindMinInArray {
             arr[i] = Integer.parseInt(scanner.nextLine());
 
         }
-
         System.out.println("Your array is " + Arrays.toString(arr));
         int min = arr[0];
 

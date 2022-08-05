@@ -1,4 +1,4 @@
-package ss5_access_modifier_static.bai_tap.access_modifier;
+package ss5_access_modifier_static.bai_tap.write_only_class;
 
 public class Student {
     private String name="John";

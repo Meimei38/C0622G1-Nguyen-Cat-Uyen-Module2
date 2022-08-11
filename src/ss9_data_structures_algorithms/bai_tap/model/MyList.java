@@ -3,9 +3,9 @@ package ss9_data_structures_algorithms.bai_tap.model;
 import java.util.Arrays;
 
 public class MyList<E> {
-    int size = 0;
-    static final int DEFAULT_CAPACITY = 10;
-    Object[] elements;
+    private int size = 0;
+    private static final int DEFAULT_CAPACITY = 10;
+    public Object[] elements;
 
     public MyList() {
         elements = new Object[10];
@@ -20,11 +20,11 @@ public class MyList<E> {
         }
     }
 
-    private int size() {
+    public int size() {
         return this.size;
     }
 
-    private void clear() {
+    public void clear() {
         this.size = 0;
         for (int i = 0; i < elements.length; i++) {
             elements[i] = null;
@@ -32,7 +32,7 @@ public class MyList<E> {
         }
     }
 
-    private boolean add(E element) {
+    public boolean add(E element) {
         if (elements.length == size) {
             ensureCapacity(5);
         }

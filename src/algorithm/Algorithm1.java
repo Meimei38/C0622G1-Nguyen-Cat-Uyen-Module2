@@ -1,4 +1,4 @@
-package Algorithm;
+package algorithm;
 
 public class Algorithm1 {
     public static void main(String[] args) {

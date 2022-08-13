@@ -11,29 +11,32 @@ public class TeacherController {
     private static ITeacherService teacherService = new TeacherService();
 
     public static void teacherManagementMenu() {
-        System.out.println("--------------------------------------");
-        System.out.println("Chào mừng đến với hệ thống quản lý giáo viên!");
-        System.out.println("1. Thêm mới giáo viên");
-        System.out.println("2. Xóa giáo viên");
-        System.out.println("3. Hiển thị danh sách giáo viên");
-        System.out.println("4. Thoát");
-        System.out.print("Mời bạn nhập chức năng 1->4: ");
-        int choice = Integer.parseInt(scanner.nextLine());
-        switch (choice) {
-            case 1:
-                teacherService.addTeacher();
-                break;
-            case 2:
-                teacherService.deleteTeacher();
-                break;
-            case 3:
-                teacherService.displayTeacher();
-                break;
-            case 4:
-                return;
-            default:
-                System.out.println("Lựa chọn của bạn không đúng. Vui lòng nhập lại!");
+        while (true) {
+            System.out.println("--------------------------------------");
+            System.out.println("Chào mừng đến với hệ thống quản lý giáo viên!");
+            System.out.println("1. Thêm mới giáo viên");
+            System.out.println("2. Xóa giáo viên");
+            System.out.println("3. Hiển thị danh sách giáo viên");
+            System.out.println("4. Thoát");
+            System.out.print("Mời bạn nhập chức năng 1->4: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+            switch (choice) {
+                case 1:
+                    teacherService.addTeacher();
+                    break;
+                case 2:
+                    teacherService.deleteTeacher();
+                    break;
+                case 3:
+                    teacherService.displayTeacher();
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Lựa chọn của bạn không đúng. Vui lòng nhập lại!");
+            }
         }
+
 
     }
 

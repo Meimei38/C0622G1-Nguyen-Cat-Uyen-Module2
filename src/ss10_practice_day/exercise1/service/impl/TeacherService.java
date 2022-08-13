@@ -32,8 +32,15 @@ public class TeacherService implements ITeacherService {
         if (teacher == null) {
             System.out.println("Không tìm thấy đối tượng cần xóa");
         } else {
-            teachers.remove(teacher);
-            System.out.println("Xóa đối tượng thành công!");
+            System.out.println("Bạn có muốn xóa giáo viên có id " + teacher.getId() + " không?");
+            System.out.println("1. Có");
+            System.out.println("2. Không");
+            int choice = Integer.parseInt(scanner.nextLine());
+            if (choice == 1) {
+                teachers.remove(teacher);
+                System.out.println("Xóa đối tượng thành công!");
+            }
+
         }
 
     }

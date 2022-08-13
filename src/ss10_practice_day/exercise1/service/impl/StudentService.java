@@ -12,7 +12,9 @@ public class StudentService implements IStudentService {
     private static List<Student> students = new ArrayList<>();
 
     static {
-        Student student=new Student(1, "Meimei", "Female", );
+        students.add(new Student(1, "Meimei", "Nữ", "12/12/1222", "C06", 9.5));
+        students.add(new Student(2, "Jinjin", "Nam", "10/10/1010", "C05", 9.5));
+        students.add(new Student(3, "Funla", "Nữ", "06/06/2006", "C04", 9.5));
     }
 
     @Override
@@ -26,9 +28,39 @@ public class StudentService implements IStudentService {
 
     @Override
     public void displayStudentList() {
-        for (Student student:students){
+        for (Student student : students) {
             System.out.println(student);
         }
+    }
+
+    @Override
+    public void deleteStudent() {
+        Student student=this.findStudent();
+       if(student==null){
+           System.out.println("Không tìm thấy đối tượng cần xóa ");
+       }else {
+           System.out.println("Bạn có chắc chắc muốn xóa học sinh mang id "+student.getId()+" không?");
+           System.out.println("1. Có");
+           System.out.println("2. Không");
+           int choice = Integer.parseInt(scanner.nextLine());
+           if(choice==1){
+               students.remove(student);
+               System.out.println("Xóa đối tượng thành công!");
+           }
+       }
+
+    }
+
+    public Student findStudent() {
+        System.out.println("Vui lòng nhập id học sinh: ");
+        int studentId= Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i <students.size() ; i++) {
+            if(students.get(i).getId()==studentId){
+                return (students.get(i));
+            }
+
+        }
+        return null;
     }
 
     public Student getInfoStudent() {

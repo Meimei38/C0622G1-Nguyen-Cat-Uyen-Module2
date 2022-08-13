@@ -1,14 +1,10 @@
 package ss10_practice_day.exercise1.controller;
 
-import ss10_practice_day.exercise1.model.Teacher;
-import ss10_practice_day.exercise1.service.IMainService;
-import ss10_practice_day.exercise1.service.impl.MainService;
-
 import java.util.Scanner;
 
 public class MainController {
     private static Scanner scanner = new Scanner(System.in);
-    private IMainService mainService=new MainService();
+
 
     public void menuManagement() {
         while (true){
@@ -21,10 +17,11 @@ public class MainController {
             int choice= Integer.parseInt(scanner.nextLine());
             switch (choice){
                 case 1:
-                    StudentController.studentManagementMenu();
+                    TeacherController.teacherManagementMenu();
                     break;
                 case 2:
-                    TeacherController.teacherManagementMenu();
+                    StudentController.studentManagementMenu();
+                    break;
                 case 3:
                     return;
                 default:

@@ -1,4 +1,4 @@
-package ss11_stack_queue.bai_tap.swap_elements.controller;
+package ss11_stack_queue.bai_tap.swap_elements;
 
 import java.util.ArrayList;
 import java.util.List;

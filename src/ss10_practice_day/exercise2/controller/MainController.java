@@ -1,7 +1,10 @@
 package ss10_practice_day.exercise2.controller;
 
 
+import ss10_practice_day.exercise2.model.Car;
+import ss10_practice_day.exercise2.model.Motorbike;
 import ss10_practice_day.exercise2.model.Truck;
+import ss10_practice_day.exercise2.model.Vehicle;
 import ss10_practice_day.exercise2.service.ICarService;
 import ss10_practice_day.exercise2.service.IMotorbikeService;
 import ss10_practice_day.exercise2.service.ITruckService;
@@ -56,18 +59,18 @@ public class MainController {
     private static void searchForObject() {
         System.out.println("Vui lòng nhập vào thông tin cần tìm kiếm: ");
         String input = scanner.nextLine();
-        truckService.searchForObject(input);
-        carService.searchForObject(input);
-        motorbikeService.searchForObject(input);
-        List searchResult = new ArrayList();
-        if (truckService.searchForObject(input) != null) {
-            searchResult.addAll(truckService.searchForObject(input));
+        List<Truck> trucks = truckService.searchForObject(input);
+        List<Car> cars = carService.searchForObject(input);
+        List<Motorbike> motorbikes = motorbikeService.searchForObject(input);
+        List<Vehicle> searchResult = new ArrayList();
+        if (trucks != null) {
+            searchResult.addAll(trucks);
         }
         if (carService.searchForObject(input) != null) {
-            searchResult.addAll(carService.searchForObject(input));
+            searchResult.addAll(cars);
         }
         if (motorbikeService.searchForObject(input) != null) {
-            searchResult.addAll(motorbikeService.searchForObject(input));
+            searchResult.addAll(motorbikes);
         }
         if (searchResult.isEmpty()) {
             System.out.println("Không tìm thấy đối tượng xe khớp yêu cầu!");

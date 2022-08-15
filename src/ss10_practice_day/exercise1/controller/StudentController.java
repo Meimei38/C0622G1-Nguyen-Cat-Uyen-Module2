@@ -9,6 +9,7 @@ public class StudentController {
     private static Scanner scanner = new Scanner(System.in);
     private static IStudentService studentService = new StudentService();
 
+
     public static void studentManagementMenu() {
         while (true) {
             System.out.println("--------------------------------------");

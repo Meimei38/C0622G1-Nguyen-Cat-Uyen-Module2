@@ -93,16 +93,26 @@ public class ProductManagingService implements IProductManagingService {
                 product.setId(Integer.parseInt(getEditInfo("Id")));
                 break;
             case 2:
+                product.setProductName(getEditInfo("Product Name"));
                 break;
             case 3:
+                product.setBrandName(getEditInfo("Brand Name"));
                 break;
             case 4:
+                product.setProductPrice(Double.parseDouble(getEditInfo("Price")));
                 break;
+            case 5:
+                return;
+            default:
+                System.out.println("Lựa chọn của bạn không đúng!");
         }
 
     }
 
     private String getEditInfo(String editContent) {
+        System.out.println("Vui lòng nhập " + editContent + "mới: ");
+        return scanner.nextLine();
+
 
     }
 

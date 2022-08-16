@@ -20,6 +20,9 @@ public class MainService {
                     return false;
                 } else {
                     left = bStack.pop();
+                    /*if ((left.equals(sym))) {
+                        return false;
+                    }else bStack.isEmpty();*/
                 }
 
             }

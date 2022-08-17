@@ -17,9 +17,10 @@ public class StudentController {
             System.out.println("1. Thêm mới học sinh");
             System.out.println("2. Xóa học sinh");
             System.out.println("3. Hiển thị danh sách học sinh");
-            System.out.println("4. Chỉnh sửa thông tin học sinh");
-            System.out.println("5. Thoát");
-            System.out.print("Mời bạn nhập chức năng 1->4: ");
+            System.out.println("4. Tìm kiếm theo id: ");
+            System.out.println("5. Tìm kiếm theo tên: ");
+            System.out.println("6. Thoát");
+            System.out.print("Mời bạn nhập chức năng 1->6: ");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
@@ -32,8 +33,12 @@ public class StudentController {
                     studentService.displayStudentList();
                     break;
                 case 4:
+                    System.out.println(studentService.findStudent());
                     break;
                 case 5:
+                    studentService.findStudentByName();
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Lựa chọn của bạn không đúng. Vui lòng nhập lại!");

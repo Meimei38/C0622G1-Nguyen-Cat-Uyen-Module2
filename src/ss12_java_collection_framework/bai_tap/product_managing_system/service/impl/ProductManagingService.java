@@ -3,9 +3,7 @@ package ss12_java_collection_framework.bai_tap.product_managing_system.service.i
 import ss12_java_collection_framework.bai_tap.product_managing_system.model.Product;
 import ss12_java_collection_framework.bai_tap.product_managing_system.service.IProductManagingService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ProductManagingService implements IProductManagingService {
     private static Scanner scanner = new Scanner(System.in);
@@ -80,37 +78,73 @@ public class ProductManagingService implements IProductManagingService {
 
     @Override
     public void edit() {
+
         Product product = findProduct();
-        System.out.println("Vui lòng chọn thông tin cần thay đổi: ");
-        System.out.println("1. Thay đổi id: ");
-        System.out.println("2. Thay đổi tên sản phẩm: ");
-        System.out.println("3. Thay đổi tên hãng: ");
-        System.out.println("4. Thay đổi giá sản phẩm: ");
-        System.out.println("5. Thoát");
-        int choice = Integer.parseInt(scanner.nextLine());
-        switch (choice) {
-            case 1:
-                product.setId(Integer.parseInt(getEditInfo("Id")));
-                break;
-            case 2:
-                product.setProductName(getEditInfo("Product Name"));
-                break;
-            case 3:
-                product.setBrandName(getEditInfo("Brand Name"));
-                break;
-            case 4:
-                product.setProductPrice(Double.parseDouble(getEditInfo("Price")));
-                break;
-            case 5:
+        do {
+            System.out.println("1. Thay đổi id: ");
+            System.out.println("2. Thay đổi tên sản phẩm: ");
+            System.out.println("3. Thay đổi tên hãng: ");
+            System.out.println("4. Thay đổi giá sản phẩm: ");
+            System.out.println("5. Thoát");
+            System.out.print("Vui lòng chọn thông tin cần thay đổi: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+            switch (choice) {
+                case 1:
+                    product.setId(Integer.parseInt(getEditInfo("Id")));
+                    break;
+                case 2:
+                    product.setProductName(getEditInfo("Tên sản phẩm"));
+                    break;
+                case 3:
+                    product.setBrandName(getEditInfo("Tên hãng"));
+                    break;
+                case 4:
+                    product.setProductPrice(Double.parseDouble(getEditInfo("Giá")));
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("Lựa chọn của bạn không đúng!");
+            }
+            System.out.println("Thay đổi thành công!");
+            System.out.println(product);
+            System.out.println("Bạn muốn tiếp tục thay đổi các thông tin khác?");
+            System.out.println("1. Có \n2. Không");
+            int option = Integer.parseInt(scanner.nextLine());
+            if (option != 1) {
                 return;
-            default:
-                System.out.println("Lựa chọn của bạn không đúng!");
-        }
+            }
+
+        } while (true);
 
     }
 
+    @Override
+    public void sortAscending() {
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o1.getProductPrice() >= o2.getProductPrice() ? 1 : -1;
+            }
+        });
+        display();
+
+    }
+
+    @Override
+    public void sortDescending() {
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o1.getProductPrice() <= o2.getProductPrice() ? 1 : -1;
+            }
+        });
+        display();
+    }
+
+
     private String getEditInfo(String editContent) {
-        System.out.println("Vui lòng nhập " + editContent + "mới: ");
+        System.out.println("Vui lòng nhập " + editContent + " mới: ");
         return scanner.nextLine();
 
 

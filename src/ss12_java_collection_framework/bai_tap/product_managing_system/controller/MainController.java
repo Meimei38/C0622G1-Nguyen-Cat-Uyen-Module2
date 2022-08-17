@@ -40,11 +40,13 @@ public class MainController {
                     productManagingService.searchByName();
                     break;
                 case 6:
+                    productManagingService.sortAscending();
                     break;
                 case 7:
+                    productManagingService.sortDescending();
                     break;
                 case 8:
-                    return;
+                    System.exit(0);
                 default:
                     System.out.println("Chức năng bạn nhập không đúng. Vui lòng nhập lại!");
             }

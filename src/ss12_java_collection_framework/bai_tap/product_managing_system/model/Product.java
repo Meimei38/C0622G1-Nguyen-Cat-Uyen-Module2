@@ -52,6 +52,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return String.format("|%-4s|%-15s|%-10s|%-8.0f|",id,productName,brandName,productPrice);
+        return String.format("|%-4s|%-15s|%-10s|%-8.0f|", id, productName, brandName, productPrice);
     }
 }

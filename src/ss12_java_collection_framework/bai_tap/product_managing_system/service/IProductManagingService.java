@@ -10,4 +10,8 @@ public interface IProductManagingService {
     void searchByName();
 
     void edit();
+
+    void sortAscending();
+
+    void sortDescending();
 }

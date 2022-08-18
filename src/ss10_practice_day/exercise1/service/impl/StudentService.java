@@ -12,9 +12,9 @@ public class StudentService implements IStudentService {
     private static List<Student> students = new ArrayList<>();
 
     static {
-        students.add(new Student(1, "Nguyễn Meimei", "Nữ", "12/12/1222", "C06", 9.5));
-        students.add(new Student(2, "Phan Jinjin", "Nam", "10/10/1010", "C05", 9.5));
-        students.add(new Student(3, "Nguyễn Funla", "Nữ", "06/06/2006", "C04", 9.5));
+        students.add(new Student(1, "Nguyễn Thanh Hải", "Nam", "12/12/1222", "C06", 9.5));
+        students.add(new Student(2, "Lê Bá Hoàng Giang", "Nam", "10/10/1010", "C05", 9.5));
+        students.add(new Student(3, "Phạm Thế Sơn", "Nữ", "06/06/2006", "C04", 9.5));
     }
 
     @Override
@@ -74,6 +74,29 @@ public class StudentService implements IStudentService {
 
         }
         System.out.println("Không tìm thấy đối tượng!");
+    }
+
+    @Override
+    public void sortByName() {
+        boolean isSwap = true;
+        Student temp;
+        for (int i = 0; i < students.size()-1 && isSwap; i++) {
+            isSwap = false;
+            for (int j = 0; j < students.size()-1-i; j++) {
+                if (students.get(j).getName().compareTo(students.get(j + 1).getName()) >0) {
+                    isSwap = true;
+                    temp = students.get(j + 1);
+                    students.set(j + 1, students.get(j));
+                    students.set(j, temp);
+
+                }
+
+            }
+
+        }
+        displayStudentList();
+
+
     }
 
     public Student getInfoStudent() {

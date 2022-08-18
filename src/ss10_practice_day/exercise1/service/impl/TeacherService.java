@@ -14,9 +14,10 @@ public class TeacherService implements ITeacherService {
     private static List<Teacher> teachers = new ArrayList<>();
 
     static {
-        teachers.add(new Teacher(1, "Nguyễn Văn A", "Nam", "20/10/2000", "Giáo viên dạy Toán"));
-        teachers.add(new Teacher(2, "Phan Nguyễn Hoài C", "Nữ", "2/1/2000", "Giáo viên dạy Hóa"));
-        teachers.add(new Teacher(3, "Trần Phan H", "Nam", "12/3/2000", "Giáo viên dạy GDCD"));
+        teachers.add(new Teacher(1, "Nguyễn Văn An", "Nam", "20/10/2000", "Giáo viên dạy Toán"));
+        teachers.add(new Teacher(2, "Nguyễn Văn Bình", "Nam", "20/10/2000", "Giáo viên dạy Toán"));
+        teachers.add(new Teacher(3, "Phan Nguyễn Hoài Chính", "Nữ", "2/1/2000", "Giáo viên dạy Hóa"));
+        teachers.add(new Teacher(4, "Trần Phan Hà", "Nam", "12/3/2000", "Giáo viên dạy GDCD"));
     }
 
     @Override
@@ -75,6 +76,28 @@ public class TeacherService implements ITeacherService {
 
         }
         System.out.println("Không tìm thấy đối tượng!");
+    }
+
+    @Override
+    public void sortByName() {
+        boolean isSwap = true;
+        Teacher temp;
+        for (int i = 0; i < teachers.size() - 1 && isSwap; i++) {
+            isSwap = false;
+            for (int j = 0; j < teachers.size() - 1 - i; j++) {
+                if (teachers.get(j).getName().compareTo(teachers.get(j + 1).getName()) > 0) {
+                    isSwap = true;
+                    temp = teachers.get(j + 1);
+                    teachers.set(j + 1, teachers.get(j));
+                    teachers.set(j, temp);
+
+                }
+
+            }
+
+        }
+        displayTeacher();
+
     }
 
     private Teacher getInfoTeacher() {

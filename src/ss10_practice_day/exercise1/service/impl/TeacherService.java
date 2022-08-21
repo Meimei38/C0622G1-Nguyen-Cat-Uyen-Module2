@@ -103,6 +103,7 @@ public class TeacherService implements ITeacherService {
     }
 
     private Teacher getInfoTeacher() {
+
         int teacherId;
         while (true) {
             try {
@@ -113,7 +114,8 @@ public class TeacherService implements ITeacherService {
                         throw new IdException("Id bạn nhập đã tồn tại. Vui lòng nhập lại!");
                     }
 
-                }break;
+                }
+                break;
             } catch (NumberFormatException e) {
                 System.out.println("Id bạn nhập không hợp lệ, vui lòng nhập lại!");
             } catch (IdException e) {
@@ -124,21 +126,49 @@ public class TeacherService implements ITeacherService {
         }
 
         String teacherName;
-        String teacherGender;
-        String teacherDateOfBirth;
-        String position;
-
         while (true) {
             try {
                 System.out.println("Mời bạn nhập tên của giáo viên ");
                 teacherName = scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Dữ liệu bạn nhập không hợp lệ, vui lòng nhập lại!");
+            } catch (Exception e) {
+                System.out.println("Dữ liệu bạn nhập không hợp lệ, vui lòng nhập lại!");
+            }
+        }
+
+        String teacherGender;
+        while (true) {
+            try {
                 System.out.println("Mời bạn nhập giới tính của giáo viên: ");
                 teacherGender = scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Dữ liệu bạn nhập không hợp lệ, vui lòng nhập lại!");
+            } catch (Exception e) {
+                System.out.println("Dữ liệu bạn nhập không hợp lệ, vui lòng nhập lại!");
+            }
+        }
+
+        String teacherDateOfBirth;
+        while (true) {
+            try {
                 System.out.println("Mời bạn nhập ngày tháng năm sinh của giáo viên: ");
                 teacherDateOfBirth = scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Dữ liệu bạn nhập không hợp lệ, vui lòng nhập lại!");
+            } catch (Exception e) {
+                System.out.println("Dữ liệu bạn nhập không hợp lệ, vui lòng nhập lại!");
+            }
+        }
+
+        String position;
+        while (true) {
+            try {
                 System.out.println("Mời bạn nhập vị trí giáo viên đang đảm nhận: ");
                 position = scanner.nextLine();
-
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Dữ liệu bạn nhập không hợp lệ, vui lòng nhập lại!");

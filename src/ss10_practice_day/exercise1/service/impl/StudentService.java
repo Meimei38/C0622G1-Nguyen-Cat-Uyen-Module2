@@ -124,18 +124,47 @@ public class StudentService implements IStudentService {
             }
         }
         String studentName;
-        String studentGender;
-        String studentDateOfBirth;
-        String className;
-
+        
         while (true) {
             try {
                 System.out.println("Mời bạn nhập tên của học sinh ");
                 studentName = scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
+            } catch (Exception e) {
+                System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
+            }
+        }
+
+        String studentGender;
+        while (true) {
+            try {
                 System.out.println("Mời bạn nhập giới tính của học sinh: ");
                 studentGender = scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
+            } catch (Exception e) {
+                System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
+            }
+        }
+
+        String studentDateOfBirth;
+        while (true) {
+            try {
                 System.out.println("Mời bạn nhập ngày tháng năm sinh của học sinh: ");
                 studentDateOfBirth = scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
+            } catch (Exception e) {
+                System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
+            }
+        }
+        String className;
+        while (true) {
+            try {
                 System.out.println("Mời bạn nhập tên lớp: ");
                 className = scanner.nextLine();
                 break;
@@ -145,6 +174,7 @@ public class StudentService implements IStudentService {
                 System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
             }
         }
+
 
         double score;
         while (true) {

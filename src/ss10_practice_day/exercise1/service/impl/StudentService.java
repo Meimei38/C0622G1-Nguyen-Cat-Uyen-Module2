@@ -140,9 +140,9 @@ public class StudentService implements IStudentService {
                 className = scanner.nextLine();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("Tên phải là chữ. Vui lòng nhập lại!");
+                System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
             } catch (Exception e) {
-                System.out.println("Tên bạn nhập không hợp lệ. Vui lòng nhập lại!");
+                System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
             }
         }
 

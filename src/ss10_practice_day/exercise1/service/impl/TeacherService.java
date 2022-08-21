@@ -3,9 +3,11 @@ package ss10_practice_day.exercise1.service.impl;
 import ss10_practice_day.exercise1.model.Student;
 import ss10_practice_day.exercise1.model.Teacher;
 import ss10_practice_day.exercise1.service.ITeacherService;
+import ss10_practice_day.exercise1.utils.IdException;
 import ss9_data_structures_algorithms.bai_tap.controller.MyListTest;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -101,16 +103,51 @@ public class TeacherService implements ITeacherService {
     }
 
     private Teacher getInfoTeacher() {
-        System.out.println("Mời bạn nhập id của giáo viên: ");
-        int teacherId = Integer.parseInt(scanner.nextLine());
-        System.out.println("Mời bạn nhập tên của giáo viên ");
-        String teacherName = scanner.nextLine();
-        System.out.println("Mời bạn nhập giới tính của giáo viên: ");
-        String teacherGender = scanner.nextLine();
-        System.out.println("Mời bạn nhập ngày tháng năm sinh của giáo viên: ");
-        String teacherDateOfBirth = scanner.nextLine();
-        System.out.println("Mời bạn nhập vị trí giáo viên đang đảm nhận: ");
-        String position = scanner.nextLine();
+        int teacherId;
+        while (true) {
+            try {
+                System.out.println("Mời bạn nhập id của giáo viên: ");
+                teacherId = Integer.parseInt(scanner.nextLine());
+                for (int i = 0; i < teachers.size(); i++) {
+                    if (teachers.get(i).getId() == teacherId) {
+                        throw new IdException("Id bạn nhập đã tồn tại. Vui lòng nhập lại!");
+                    }
+
+                }break;
+            } catch (NumberFormatException e) {
+                System.out.println("Id bạn nhập không hợp lệ, vui lòng nhập lại!");
+            } catch (IdException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Id bạn nhập không hợp lệ, vui lòng nhập lại!");
+            }
+        }
+
+        String teacherName;
+        String teacherGender;
+        String teacherDateOfBirth;
+        String position;
+
+        while (true) {
+            try {
+                System.out.println("Mời bạn nhập tên của giáo viên ");
+                teacherName = scanner.nextLine();
+                System.out.println("Mời bạn nhập giới tính của giáo viên: ");
+                teacherGender = scanner.nextLine();
+                System.out.println("Mời bạn nhập ngày tháng năm sinh của giáo viên: ");
+                teacherDateOfBirth = scanner.nextLine();
+                System.out.println("Mời bạn nhập vị trí giáo viên đang đảm nhận: ");
+                position = scanner.nextLine();
+
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Dữ liệu bạn nhập không hợp lệ, vui lòng nhập lại!");
+            } catch (Exception e) {
+                System.out.println("Dữ liệu bạn nhập không hợp lệ, vui lòng nhập lại!");
+            }
+        }
+
+
         Teacher teacher = new Teacher(teacherId, teacherName, teacherGender, teacherDateOfBirth, position);
         return teacher;
     }

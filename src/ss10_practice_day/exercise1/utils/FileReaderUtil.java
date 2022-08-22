@@ -1,6 +1,7 @@
 package ss10_practice_day.exercise1.utils;
 
 import ss10_practice_day.exercise1.model.Student;
+import ss10_practice_day.exercise1.model.Teacher;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -32,5 +33,16 @@ public class FileReaderUtil {
         }
         return students;
 
+    }
+    public static List<Teacher> readTeacherFile(String path) throws IOException {
+        List<String> strings = readFile(path);
+        List<Teacher> teachers = new ArrayList<>();
+        String [] info;
+        for (String line:strings){
+            info=line.split(",");
+            Teacher teacher = new Teacher(Integer.parseInt(info[0]),info[1],info[2],info[3],info[4]);
+            teachers.add(teacher);
+        }
+        return teachers;
     }
 }

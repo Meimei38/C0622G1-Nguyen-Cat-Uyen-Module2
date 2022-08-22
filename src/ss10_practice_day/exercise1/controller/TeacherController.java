@@ -4,6 +4,7 @@ import ss10_practice_day.exercise1.service.ITeacherService;
 import ss10_practice_day.exercise1.service.impl.StudentService;
 import ss10_practice_day.exercise1.service.impl.TeacherService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class TeacherController {
@@ -25,13 +26,25 @@ public class TeacherController {
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
-                    teacherService.addTeacher();
+                    try {
+                        teacherService.addTeacher();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 2:
-                    teacherService.deleteTeacher();
+                    try {
+                        teacherService.deleteTeacher();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 3:
-                    teacherService.displayTeacher();
+                    try {
+                        teacherService.displayTeacher();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 4:
                     System.out.println(teacherService.findTeacher());
@@ -40,7 +53,11 @@ public class TeacherController {
                     teacherService.findTeacherByName();
                     break;
                 case 6:
-                    teacherService.sortByName();
+                    try {
+                        teacherService.sortByName();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 case 7:
                     return;
                 default:

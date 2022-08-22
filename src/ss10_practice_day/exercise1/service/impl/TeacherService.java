@@ -2,8 +2,11 @@ package ss10_practice_day.exercise1.service.impl;
 
 import ss10_practice_day.exercise1.model.Teacher;
 import ss10_practice_day.exercise1.service.ITeacherService;
+import ss10_practice_day.exercise1.utils.FileReaderUtil;
+import ss10_practice_day.exercise1.utils.FileWriterUtil;
 import ss10_practice_day.exercise1.utils.exception.IdException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -12,23 +15,20 @@ import java.util.Scanner;
 public class TeacherService implements ITeacherService {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Teacher> teachers = new ArrayList<>();
-
-    static {
-        teachers.add(new Teacher(1, "Nguyễn Văn An", "Nam", "20/10/2000", "Giáo viên dạy Toán"));
-        teachers.add(new Teacher(2, "Nguyễn Văn Bình", "Nam", "20/10/2000", "Giáo viên dạy Toán"));
-        teachers.add(new Teacher(3, "Phan Nguyễn Hoài Chính", "Nữ", "2/1/2000", "Giáo viên dạy Hóa"));
-        teachers.add(new Teacher(4, "Trần Phan Hà", "Nam", "12/3/2000", "Giáo viên dạy GDCD"));
-    }
+    private static final String path = "src\\ss10_practice_day\\exercise1\\data\\teacher.txt";
 
     @Override
-    public void addTeacher() {
+    public void addTeacher() throws IOException {
+        teachers = FileReaderUtil.readTeacherFile(path);
         Teacher teacher = this.getInfoTeacher();
         teachers.add(teacher);
+        FileWriterUtil.writeTeacherFile(path, teachers);
         System.out.println("Nhập thông tin giáo viên thành công!");
     }
 
     @Override
-    public void deleteTeacher() {
+    public void deleteTeacher() throws IOException {
+        teachers = FileReaderUtil.readTeacherFile(path);
         Teacher teacher = this.findTeacher();
         if (teacher == null) {
             System.out.println("Không tìm thấy đối tượng cần xóa");
@@ -39,6 +39,7 @@ public class TeacherService implements ITeacherService {
             int choice = Integer.parseInt(scanner.nextLine());
             if (choice == 1) {
                 teachers.remove(teacher);
+                FileWriterUtil.writeTeacherFile(path, teachers);
                 System.out.println("Xóa đối tượng thành công!");
             }
 
@@ -47,7 +48,8 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
-    public void displayTeacher() {
+    public void displayTeacher() throws IOException {
+        teachers = FileReaderUtil.readTeacherFile(path);
         for (Teacher teacher : teachers) {
             System.out.println(teacher);
         }
@@ -79,7 +81,8 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
-    public void sortByName() {
+    public void sortByName() throws IOException {
+        teachers = FileReaderUtil.readTeacherFile(path);
         boolean isSwap = true;
         Teacher temp;
         for (int i = 0; i < teachers.size() - 1 && isSwap; i++) {
@@ -96,6 +99,7 @@ public class TeacherService implements ITeacherService {
             }
 
         }
+        FileWriterUtil.writeTeacherFile(path, teachers);
         displayTeacher();
 
     }

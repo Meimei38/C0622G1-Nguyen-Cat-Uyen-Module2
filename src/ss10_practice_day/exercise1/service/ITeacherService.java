@@ -2,16 +2,18 @@ package ss10_practice_day.exercise1.service;
 
 import ss10_practice_day.exercise1.model.Teacher;
 
+import java.io.IOException;
+
 public interface ITeacherService {
-    void addTeacher();
+    void addTeacher() throws IOException;
 
-    void deleteTeacher();
+    void deleteTeacher() throws IOException;
 
-    void displayTeacher();
+    void displayTeacher() throws IOException;
 
     Teacher findTeacher();
 
     void findTeacherByName();
 
-    void sortByName();
+    void sortByName() throws IOException;
 }

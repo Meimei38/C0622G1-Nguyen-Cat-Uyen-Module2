@@ -1,6 +1,6 @@
 package ss10_practice_day.exercise1.model;
 
-public class Teacher extends Person{
+public class Teacher extends Person {
     private String position;
 
     public Teacher() {
@@ -17,8 +17,6 @@ public class Teacher extends Person{
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "position='" + position + '\'' +
-                "} " + super.toString();
+        return super.toString() + String.format(", %s", position);
     }
 }

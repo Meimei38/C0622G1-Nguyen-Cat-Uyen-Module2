@@ -3,6 +3,7 @@ package ss10_practice_day.exercise1.controller;
 import ss10_practice_day.exercise1.service.IStudentService;
 import ss10_practice_day.exercise1.service.impl.StudentService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class StudentController {
@@ -25,13 +26,25 @@ public class StudentController {
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
-                    studentService.addStudent();
+                    try {
+                        studentService.addStudent();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 2:
-                    studentService.deleteStudent();
+                    try {
+                        studentService.deleteStudent();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 3:
-                    studentService.displayStudentList();
+                    try {
+                        studentService.displayStudentList();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 4:
                     System.out.println(studentService.findStudent());
@@ -40,7 +53,11 @@ public class StudentController {
                     studentService.findStudentByName();
                     break;
                 case 6:
-                    studentService.sortByName();
+                    try {
+                        studentService.sortByName();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 7:
                     return;

@@ -1,10 +1,8 @@
 package ss10_practice_day.exercise1.service.impl;
 
-import ss10_practice_day.exercise1.model.Student;
 import ss10_practice_day.exercise1.model.Teacher;
 import ss10_practice_day.exercise1.service.ITeacherService;
-import ss10_practice_day.exercise1.utils.IdException;
-import ss9_data_structures_algorithms.bai_tap.controller.MyListTest;
+import ss10_practice_day.exercise1.utils.exception.IdException;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

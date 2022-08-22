@@ -1,10 +1,14 @@
 package ss10_practice_day.exercise1.service.impl;
 
-import ss10_practice_day.exercise1.utils.IdException;
-import ss10_practice_day.exercise1.utils.PointException;
+import ss10_practice_day.exercise1.utils.FileReaderUtil;
+import ss10_practice_day.exercise1.utils.FileWriterUtil;
+import ss10_practice_day.exercise1.utils.exception.IdException;
+import ss10_practice_day.exercise1.utils.exception.PointException;
 import ss10_practice_day.exercise1.model.Student;
 import ss10_practice_day.exercise1.service.IStudentService;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -12,32 +16,32 @@ import java.util.Scanner;
 
 public class StudentService implements IStudentService {
     private static Scanner scanner = new Scanner(System.in);
-    private static List<Student> students = new ArrayList<>();
+    private static final String path = "src\\ss10_practice_day\\exercise1\\data\\student.txt";
+    private static List<Student> students;
 
-    static {
-        students.add(new Student(1, "Nguyễn Thanh Hải", "Nam", "12/12/1222", "C06", 9.5));
-        students.add(new Student(2, "Lê Bá Hoàng Giang", "Nam", "10/10/1010", "C05", 9.5));
-        students.add(new Student(3, "Phạm Thế Sơn", "Nữ", "06/06/2006", "C04", 9.5));
-    }
 
     @Override
-    public void addStudent() {
+    public void addStudent() throws IOException {
+        students = FileReaderUtil.readStudentFile(path);
         Student student = this.getInfoStudent();
         students.add(student);
+        FileWriterUtil.writeStudentFile(path, students);
         System.out.println("Thêm mới học sinh thành công!");
 
 
     }
 
     @Override
-    public void displayStudentList() {
+    public void displayStudentList() throws IOException {
+        students = FileReaderUtil.readStudentFile(path);
         for (Student student : students) {
             System.out.println(student);
         }
     }
 
     @Override
-    public void deleteStudent() {
+    public void deleteStudent() throws IOException {
+        students = FileReaderUtil.readStudentFile(path);
         Student student = this.findStudent();
         if (student == null) {
             System.out.println("Không tìm thấy đối tượng cần xóa ");
@@ -48,6 +52,7 @@ public class StudentService implements IStudentService {
             int choice = Integer.parseInt(scanner.nextLine());
             if (choice == 1) {
                 students.remove(student);
+                FileWriterUtil.writeStudentFile(path, students);
                 System.out.println("Xóa đối tượng thành công!");
             }
         }
@@ -80,7 +85,8 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void sortByName() {
+    public void sortByName() throws IOException {
+        students = FileReaderUtil.readStudentFile(path);
         boolean isSwap = true;
         Student temp;
         for (int i = 0; i < students.size() - 1 && isSwap; i++) {
@@ -97,6 +103,7 @@ public class StudentService implements IStudentService {
             }
 
         }
+        FileWriterUtil.writeStudentFile(path, students);
         displayStudentList();
 
 
@@ -124,7 +131,7 @@ public class StudentService implements IStudentService {
             }
         }
         String studentName;
-        
+
         while (true) {
             try {
                 System.out.println("Mời bạn nhập tên của học sinh ");

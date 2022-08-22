@@ -2,17 +2,19 @@ package ss10_practice_day.exercise1.service;
 
 import ss10_practice_day.exercise1.model.Student;
 
+import java.io.IOException;
+
 public interface IStudentService {
-    void addStudent();
+    void addStudent() throws IOException;
 
-    void displayStudentList();
+    void displayStudentList() throws IOException;
 
-    void deleteStudent();
+    void deleteStudent() throws IOException;
 
 
     Student findStudent();
 
     void findStudentByName();
 
-    void sortByName();
+    void sortByName() throws IOException;
 }

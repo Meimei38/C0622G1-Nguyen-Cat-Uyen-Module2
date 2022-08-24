@@ -20,6 +20,6 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return super.toString() + String.format(", %s, %.2f", className, score);
+        return super.toString() + String.format(",%s,%.2f", className, score);
     }
 }

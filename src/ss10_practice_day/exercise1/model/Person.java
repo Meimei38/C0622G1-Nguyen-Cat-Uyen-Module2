@@ -50,6 +50,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("%d, %s, %s, %s", id, name, gender, dateOfBirth);
+        return String.format("%d,%s,%s,%s", id, name, gender, dateOfBirth);
     }
 }

@@ -17,6 +17,6 @@ public class Teacher extends Person {
 
     @Override
     public String toString() {
-        return super.toString() + String.format(", %s", position);
+        return super.toString() + String.format(",%s", position);
     }
 }

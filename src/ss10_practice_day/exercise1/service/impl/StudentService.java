@@ -103,7 +103,6 @@ public class StudentService implements IStudentService {
             }
 
         }
-        FileWriterUtil.writeStudentFile(path, students);
         displayStudentList();
 
 
@@ -111,7 +110,12 @@ public class StudentService implements IStudentService {
 
     public Student getInfoStudent() {
         int studentId;
-        while (true) {
+        if (students.size() == 0) {
+            studentId = 1;
+        } else {
+            studentId = (students.get(students.size() - 1).getId()) + 1;
+        }
+        /*while (true) {
             try {
                 System.out.println("Mời bạn nhập id của học sinh: ");
                 studentId = Integer.parseInt(scanner.nextLine());
@@ -130,6 +134,7 @@ public class StudentService implements IStudentService {
                 System.out.println("Id bạn nhập không hợp lệ!");
             }
         }
+*/
         String studentName;
 
         while (true) {

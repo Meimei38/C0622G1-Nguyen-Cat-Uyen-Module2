@@ -7,5 +7,8 @@ public class CopyFile {
         ReadAndWriteFile readAndWriteFile = new ReadAndWriteFile();
         List<String> inputList = readAndWriteFile.readFile("src\\ss16_io_text_file\\bai_tap\\copy_file_text\\data\\source_file.txt");
         readAndWriteFile.writeFile(inputList, "src\\ss16_io_text_file\\bai_tap\\copy_file_text\\data\\target_file.txt");
+        String count = readAndWriteFile.writeFile(inputList, "src\\ss16_io_text_file\\bai_tap\\copy_file_text\\data\\target_file.txt");
+        System.out.println(count);
+
     }
 }

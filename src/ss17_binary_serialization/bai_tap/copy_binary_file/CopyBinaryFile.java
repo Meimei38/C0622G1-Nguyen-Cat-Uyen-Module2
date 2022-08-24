@@ -27,7 +27,7 @@ public class CopyBinaryFile {
 
     }
 
-    private static List<String> readTargetFile(String path) {
+    private static List<String> readBinaryFile(String path) {
         List<String> lines = new ArrayList<>();
         try {
             File file = new File(path);
@@ -72,15 +72,34 @@ public class CopyBinaryFile {
         return inputList;
 
     }
+    public static int countByte(String path){
+        int size = 0;
+        try {
+            FileInputStream fileInputStream = new FileInputStream(path);
+            size = fileInputStream.available();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return size;
+    }
 
 
     public static void main(String[] args) {
         String sourceFile = "src\\ss17_binary_serialization\\bai_tap\\copy_binary_file\\data\\source_file.txt";
         String targetFile = "src\\ss17_binary_serialization\\bai_tap\\copy_binary_file\\data\\target_file.dat";
+        String copiedFile = "src\\ss16_io_text_file\\bai_tap\\copy_file_text\\data\\copy_target_file.dat";
 
-        List<String> content = readSourceFile(sourceFile);
-        writeFile(targetFile,content);
-        System.out.println(readTargetFile(targetFile));
+        List<String> content = readSourceFile(sourceFile); //Đọc file ký tự
+        writeFile(targetFile,content); // Viết vào file nhị phân
+        List<String> copiedContent = readBinaryFile(targetFile); // Đọc file nhị phân
+        writeFile(copiedFile,copiedContent); // Copy bản file nhị phân vào 1 file khác
+        System.out.printf("The size of copied file is: %d bytes",countByte(copiedFile));
+
+
+
+
 
 
     }

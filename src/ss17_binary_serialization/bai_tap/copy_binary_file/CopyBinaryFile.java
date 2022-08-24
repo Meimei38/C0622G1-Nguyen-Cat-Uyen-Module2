@@ -27,7 +27,7 @@ public class CopyBinaryFile {
 
     }
 
-    private static List<String> readFile(String path) {
+    private static List<String> readTargetFile(String path) {
         List<String> lines = new ArrayList<>();
         try {
             File file = new File(path);
@@ -36,7 +36,7 @@ public class CopyBinaryFile {
             }
             FileInputStream fileInputStream = new FileInputStream(file);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            lines= (List<String>) objectInputStream.readObject();
+            lines = (List<String>) objectInputStream.readObject();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -44,18 +44,43 @@ public class CopyBinaryFile {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.getStackTrace();
         }
         return lines;
     }
 
+    public static List<String> readSourceFile(String filePath) {
+        List<String> inputList = new ArrayList<>();
+        try {
+            File file = new File(filePath);
+            if ((!file.exists())) {
+                throw new FileNotFoundException();
+            }
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                inputList.add(line);
+            }
+            bufferedReader.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found!");
+        } catch (Exception e) {
+            System.out.println("Error!");
+        }
+        return inputList;
+
+    }
 
 
     public static void main(String[] args) {
         String sourceFile = "src\\ss17_binary_serialization\\bai_tap\\copy_binary_file\\data\\source_file.txt";
-        String targetFile ="src\\ss17_binary_serialization\\bai_tap\\copy_binary_file\\data\\target_file.dat";
+        String targetFile = "src\\ss17_binary_serialization\\bai_tap\\copy_binary_file\\data\\target_file.dat";
 
-        List<String> content = CopyBinaryFile.readFile(sourceFile);
-        CopyBinaryFile.writeFile(targetFile,content);
+        List<String> content = readSourceFile(sourceFile);
+        writeFile(targetFile,content);
+        System.out.println(readTargetFile(targetFile));
 
 
     }

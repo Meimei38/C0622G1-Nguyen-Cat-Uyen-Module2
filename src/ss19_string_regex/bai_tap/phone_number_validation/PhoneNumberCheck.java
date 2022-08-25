@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class PhoneNumberCheck {
     public static void main(String[] args) {
-        final String PHONE_NUMBER_REGEX= "[(][0-9]{2}[)][-][(][0-9]{10}[)]";
+        final String PHONE_NUMBER_REGEX= "[(]\\d{2}[)][-][(]\\d{10}[)]";
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the phone number: ");
         String number = scanner.nextLine();

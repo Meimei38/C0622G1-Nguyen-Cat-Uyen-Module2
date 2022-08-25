@@ -1,7 +1,7 @@
 package ss19_string_regex.bai_tap.phone_number_validation;
 
 public class PhoneNumber {
-    String phoneNumber;
+    private String phoneNumber;
 
     public PhoneNumber() {
     }
@@ -12,6 +12,6 @@ public class PhoneNumber {
     }
 
     public boolean validate(String regex){
-        return phoneNumber.matches(regex);
+        return this.phoneNumber.matches(regex);
     }
 }

@@ -9,5 +9,8 @@ public class ClassName {
     public ClassName(String className) {
         this.className = className;
     }
+    public boolean classNameCheck(String regex){
+        return this.className.matches(regex);
+    }
 
 }

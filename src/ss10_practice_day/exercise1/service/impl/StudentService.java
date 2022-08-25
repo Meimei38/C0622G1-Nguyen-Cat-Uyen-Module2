@@ -148,7 +148,7 @@ public class StudentService implements IStudentService {
                 }
                 break;
             } catch (NameException e) {
-                e.getMessage();
+                System.out.println(e.getMessage());
             } catch (InputMismatchException e) {
                 System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
             } catch (Exception e) {

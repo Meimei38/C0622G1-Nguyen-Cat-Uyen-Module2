@@ -1,23 +1,25 @@
 package ss10_practice_day.exercise1.service.impl;
 
+import ss10_practice_day.exercise1.model.Person;
 import ss10_practice_day.exercise1.utils.FileReaderUtil;
 import ss10_practice_day.exercise1.utils.FileWriterUtil;
 import ss10_practice_day.exercise1.utils.exception.IdException;
+import ss10_practice_day.exercise1.utils.exception.NameException;
 import ss10_practice_day.exercise1.utils.exception.PointException;
 import ss10_practice_day.exercise1.model.Student;
 import ss10_practice_day.exercise1.service.IStudentService;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class StudentService implements IStudentService {
     private static Scanner scanner = new Scanner(System.in);
     private static final String path = "src\\ss10_practice_day\\exercise1\\data\\student.txt";
     private static List<Student> students;
+    public final String NAME_REGEX = "^\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)*$";
 
 
     @Override
@@ -141,7 +143,12 @@ public class StudentService implements IStudentService {
             try {
                 System.out.println("Mời bạn nhập tên của học sinh ");
                 studentName = scanner.nextLine();
+                if (!(studentName.matches(NAME_REGEX))) {
+                    throw new NameException("Tên bạn nhập sai định dạng.Vui lòng nhập lại.");
+                }
                 break;
+            } catch (NameException e) {
+                e.getMessage();
             } catch (InputMismatchException e) {
                 System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
             } catch (Exception e) {
@@ -163,12 +170,31 @@ public class StudentService implements IStudentService {
         }
 
         String studentDateOfBirth;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        simpleDateFormat.setLenient(false);
+        Date checkFormat;
+        Date now;
+        String stringNow;
+
+
         while (true) {
             try {
                 System.out.println("Mời bạn nhập ngày tháng năm sinh của học sinh: ");
                 studentDateOfBirth = scanner.nextLine();
+                //check dữ liệu nhập vào
+                checkFormat = simpleDateFormat.parse(studentDateOfBirth);
+                //thời gian hiện tại
+                now = new Date();
+                //format thành thời gian hiện tại
+                stringNow = simpleDateFormat.format(now);
                 break;
-            } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
+                System.out.println("Ngày sinh phải có định dạng dd/MM/yyyy");
+            } catch (ParseException e) {
+                System.out.println("Thông tin bạn nhập vào không hợp lệ. Vui lòng nhập lại!");
+
+            } catch
+            (InputMismatchException e) {
                 System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
             } catch (Exception e) {
                 System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");

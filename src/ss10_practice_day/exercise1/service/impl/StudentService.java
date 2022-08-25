@@ -143,7 +143,7 @@ public class StudentService implements IStudentService {
             try {
                 System.out.println("Mời bạn nhập tên của học sinh ");
                 studentName = scanner.nextLine();
-                if (!(studentName.matches(NAME_REGEX))) {
+                if (!studentName.matches(NAME_REGEX)) {
                     throw new NameException("Tên bạn nhập sai định dạng.Vui lòng nhập lại.");
                 }
                 break;
@@ -170,7 +170,7 @@ public class StudentService implements IStudentService {
         }
 
         String studentDateOfBirth;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         simpleDateFormat.setLenient(false);
         Date checkFormat;
         Date now;

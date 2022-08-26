@@ -21,7 +21,7 @@ public class ProductService implements IProductService {
 
     @Override
     public void addProduct() {
-
+        products = ReadFile.readFile(PATH);
         String code;
         while (true) {
             try {

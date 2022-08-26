@@ -3,6 +3,7 @@ package ss10_practice_day.exercise1.service.impl;
 import ss10_practice_day.exercise1.model.Person;
 import ss10_practice_day.exercise1.utils.FileReaderUtil;
 import ss10_practice_day.exercise1.utils.FileWriterUtil;
+import ss10_practice_day.exercise1.utils.exception.AgeException;
 import ss10_practice_day.exercise1.utils.exception.IdException;
 import ss10_practice_day.exercise1.utils.exception.NameException;
 import ss10_practice_day.exercise1.utils.exception.PointException;
@@ -13,6 +14,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.*;
 
 public class StudentService implements IStudentService {
@@ -170,29 +176,27 @@ public class StudentService implements IStudentService {
         }
 
         String studentDateOfBirth;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        simpleDateFormat.setLenient(false);
-        Date checkFormat;
-        Date now;
-        String stringNow;
+        String pattern = "dd/MM/uuuu";
+        DateTimeFormatter dateTimeFormatter;
+        LocalDate birthday;
 
 
         while (true) {
             try {
                 System.out.println("Mời bạn nhập ngày tháng năm sinh của học sinh: ");
                 studentDateOfBirth = scanner.nextLine();
-                //check dữ liệu nhập vào
-                checkFormat = simpleDateFormat.parse(studentDateOfBirth);
-                //thời gian hiện tại
-                now = new Date();
-                //format thành thời gian hiện tại
-                stringNow = simpleDateFormat.format(now);
+                dateTimeFormatter = DateTimeFormatter.ofPattern(pattern).withResolverStyle(ResolverStyle.STRICT);
+                birthday = LocalDate.parse(studentDateOfBirth, dateTimeFormatter);
+
+                int age = calculatePeriod(birthday);
+                if (age <= 0 || age >= 100) {
+                    throw new AgeException("Tuổi hợp lệ phải lớn hơn 0 và nhỏ hơn 100");
+                }
                 break;
+            } catch (AgeException e) {
+                System.out.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.out.println("Ngày sinh phải có định dạng dd/MM/yyyy");
-            } catch (ParseException e) {
-                System.out.println("Thông tin bạn nhập vào không hợp lệ. Vui lòng nhập lại!");
-
             } catch
             (InputMismatchException e) {
                 System.out.println("Thông tin bạn nhập không hợp lệ, vui lòng nhập lại!");
@@ -234,6 +238,13 @@ public class StudentService implements IStudentService {
 
         Student student = new Student(studentId, studentName, studentGender, studentDateOfBirth, className, score);
         return student;
+
+    }
+
+    public static int calculatePeriod(LocalDate localDate) {
+        LocalDate now = LocalDate.now();
+        int age = Period.between(localDate, now).getYears();
+        return age;
 
     }
 }

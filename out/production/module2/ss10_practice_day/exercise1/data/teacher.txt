@@ -2,3 +2,4 @@
 2,    Nguyễn Văn Bình,    Nam,    20/10/2000,    Giáo viên dạy Toán
 3,    Phan Nguyễn Hoài Chính,    Nữ,    2/1/2000,    Giáo viên dạy Hóa
 4,    Trần Phan Hà,    Nam,    12/3/2000,    Giáo viên dạy GDCD
+5,Nguyễn Văn An,Nam,30/4/1996,Giáo viên dạy Thể Dục

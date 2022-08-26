@@ -1,6 +1,4 @@
-package algorithm.regrex;
-
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+package algorithm.demo;
 
 import java.util.Scanner;
 

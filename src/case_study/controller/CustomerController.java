@@ -8,8 +8,9 @@ import java.util.Scanner;
 public class CustomerController {
     private static Scanner scanner = new Scanner(System.in);
     private static ICustomerService customerService = new CustomerService();
+
     public static void customerManagement() {
-        while (true){
+        while (true) {
             System.out.println("----------Customer Management System----------");
             System.out.println("1. Display customer list");
             System.out.println("2. Add new customer");
@@ -17,22 +18,23 @@ public class CustomerController {
             System.out.println("4. Return main menu");
             System.out.println("Please choose an option to continue: ");
             int choice = Integer.parseInt(scanner.nextLine());
-            switch (choice){
+            switch (choice) {
                 case 1:
+                    customerService.displayCustomer();
                     break;
                 case 2:
-
+                    customerService.addCustomer();
                     break;
                 case 3:
-
+                    customerService.editCustomer();
                     break;
                 case 4:
-
                     return;
                 default:
                     System.out.println("Invalid choice! Please choose again!");
             }
 
 
+        }
     }
 }

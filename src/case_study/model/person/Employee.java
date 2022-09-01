@@ -3,22 +3,22 @@ package case_study.model.person;
 public class Employee extends Person {
     private String educationalLevel;
     private String position;
-    private double salaryRate;
+    private double wage;
 
     public Employee() {
     }
 
-    public Employee(String educationalLevel, String position, double salaryRate) {
+    public Employee(String educationalLevel, String position, double wage) {
         this.educationalLevel = educationalLevel;
         this.position = position;
-        this.salaryRate = salaryRate;
+        this.wage = wage;
     }
 
-    public Employee(String code, String name, String dateOfBirth, String gender, int id, String phoneNumber, String email, String educationalLevel, String position, double salaryRate) {
+    public Employee(String code, String name, String dateOfBirth, String gender, String id, String phoneNumber, String email, String educationalLevel, String position, double wage) {
         super(code, name, dateOfBirth, gender, id, phoneNumber, email);
         this.educationalLevel = educationalLevel;
         this.position = position;
-        this.salaryRate = salaryRate;
+        this.wage = wage;
     }
 
     public String getEducationalLevel() {
@@ -37,12 +37,12 @@ public class Employee extends Person {
         this.position = position;
     }
 
-    public double getSalaryRate() {
-        return salaryRate;
+    public double getWage() {
+        return wage;
     }
 
-    public void setSalaryRate(double salaryRate) {
-        this.salaryRate = salaryRate;
+    public void setWage(double wage) {
+        this.wage = wage;
     }
 
     @Override
@@ -50,7 +50,8 @@ public class Employee extends Person {
         return "Employee{" +
                 "educationalLevel='" + educationalLevel + '\'' +
                 ", position='" + position + '\'' +
-                ", salaryRate=" + salaryRate +
+                ", salaryRate=" + wage +
                 "} " + super.toString();
     }
+
 }

@@ -5,14 +5,14 @@ public abstract class Person {
     private String name;
     private String dateOfBirth;
     private String gender;
-    private int id;
+    private String id;
     private String phoneNumber;
     private String email;
 
     public Person() {
     }
 
-    public Person(String code, String name, String dateOfBirth, String gender, int id, String phoneNumber, String email) {
+    public Person(String code, String name, String dateOfBirth, String gender, String id, String phoneNumber, String email) {
         this.code = code;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -54,11 +54,11 @@ public abstract class Person {
         this.gender = gender;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -77,6 +77,7 @@ public abstract class Person {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @Override
     public String toString() {

@@ -27,8 +27,6 @@ public class DemoCheckDateAge {
 
     public static int calculateAge(LocalDate localDate) {
         LocalDate now = LocalDate.now();
-        System.out.println(localDate);
-        System.out.println(now);
         int age = Period.between(localDate, now).getYears();
         // phương thức tính khoảng thời gian giữa 2 mốc. getYears để lấy ra năm (đã được làm tròn). Ví dụ 1.5 năm sẽ tính là 1
         return age;

@@ -19,9 +19,10 @@ public class PromotionController {
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
+                    promotionService.displayCustomerUsingService();
                     break;
                 case 2:
-
+                    promotionService.displayCustomerGettingVoucher();
                     break;
                 case 3:
                     return;
@@ -32,3 +33,4 @@ public class PromotionController {
 
         }
     }
+}

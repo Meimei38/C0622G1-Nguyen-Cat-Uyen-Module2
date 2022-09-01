@@ -48,10 +48,10 @@ public class GetInfoFacility {
         if (villaList.size() == 0) {
             villa.setServiceCode("SVVL-1");
         } else {
-            String[] number = villaList.get(villaList.size()-1).getServiceCode().split("-");
+            String[] number = villaList.get(villaList.size() - 1).getServiceCode().split("-");
             int num = Integer.parseInt(number[1]);
             num += 1;
-            villa.setServiceCode("SVVL-"+num);
+            villa.setServiceCode("SVVL-" + num);
         }
         villaList.add(villa);
         return villa;
@@ -69,12 +69,30 @@ public class GetInfoFacility {
         if (houseList.size() == 0) {
             house.setServiceCode("SVHO-1");
         } else {
-            String[] number = houseList.get(houseList.size()-1).getServiceCode().split("-");
+            String[] number = houseList.get(houseList.size() - 1).getServiceCode().split("-");
             int num = Integer.parseInt(number[1]);
             num += 1;
-            house.setServiceCode("SVHO-"+num);
+            house.setServiceCode("SVHO-" + num);
         }
         houseList.add(house);
         return house;
+    }
+
+    public Room getInfoRoom() {
+        getInfoFacility();
+        String freeService;
+        System.out.println("Enter free service");
+        freeService = scanner.nextLine();
+        Room room = new Room(serviceCode, serviceName, area, rentPrice, maxOccupancy, rentType, freeService);
+        if (roomList.size() == 0) {
+            room.setServiceCode("SVRO-1");
+        } else {
+            String[] number = roomList.get(roomList.size() - 1).getServiceCode().split("-");
+            int num = Integer.parseInt(number[1]);
+            num += 1;
+            room.setServiceCode("SVHO-" + num);
+        }
+        roomList.add(room);
+        return room;
     }
 }

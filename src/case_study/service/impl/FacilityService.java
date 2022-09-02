@@ -11,8 +11,10 @@ import case_study.ulti.read_write.WriteFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class FacilityService implements IFacilityService {
+    private static Scanner scanner = new Scanner(System.in);
     public static final String FACILITY_LIST_CSV = "src\\case_study\\data\\facility_list.csv";
     public static final String MAINTENANCE_LIST_CSV = "src\\case_study\\data\\facility_maintenance_list.csv";
     List<Facility> facilities = new ArrayList<>();
@@ -60,6 +62,44 @@ public class FacilityService implements IFacilityService {
         facilities.add(room);
         System.out.println("New room added!");
         WriteFile.writeFile(FACILITY_LIST_CSV, convertListFacilityToListString(facilities));
+    }
+
+    @Override
+    public void deleteFacility() {
+        facilities = readFileFacility(FACILITY_LIST_CSV);
+        Facility facility = this.findFacility();
+        if (facility == null) {
+            System.out.println("Cannot find the facility having this service code!");
+        } else {
+            int choice;
+            while (true) {
+                System.out.println("Are you sure you want to delete this facility: " + facility.toString() + "?");
+                System.out.println("1.Yes\n2.No");
+                choice = Integer.parseInt(scanner.nextLine());
+                if (choice == 1) {
+                    facilities.remove(facility);
+                    System.out.println("Successfully deleted!");
+                    return;
+                } else if (choice == 2) {
+                    return;
+                } else {
+                    System.out.println("Invalid choice! Please choose again!");
+                }
+            }
+        }
+    }
+
+    public Facility findFacility() {
+        facilities = readFileFacility(FACILITY_LIST_CSV);
+        System.out.println("Enter service code: ");
+        String input = scanner.nextLine();
+        for (int i = 0; i < facilities.size(); i++) {
+            if (facilities.get(i).getServiceCode().matches(input)) {
+                return facilities.get(i);
+            }
+
+        }
+        return null;
     }
 
     private List<Facility> readFileFacility(String src) {

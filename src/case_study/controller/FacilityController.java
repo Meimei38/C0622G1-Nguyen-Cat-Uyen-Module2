@@ -14,9 +14,10 @@ public class FacilityController {
         while (true) {
             System.out.println("----------Facility Management System----------");
             System.out.println("1. Display facility list");
-            System.out.println("2. Add new facility list");
-            System.out.println("3. Display facility maintenance list");
-            System.out.println("4. Return main menu");
+            System.out.println("2. Add new facility");
+            System.out.println("3. Delete facility ");
+            System.out.println("4. Display facility maintenance list");
+            System.out.println("5. Exit");
             System.out.println("Please choose an option to continue: ");
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
@@ -27,9 +28,11 @@ public class FacilityController {
                     displayAddingMenu();
                     break;
                 case 3:
+                    facilityService.deleteFacility();
+                case 4:
                     facilityService.displayFacilityMaintenance();
                     break;
-                case 4:
+                case 5:
                     return;
                 default:
                     System.out.println("Invalid choice! Please choose again!");

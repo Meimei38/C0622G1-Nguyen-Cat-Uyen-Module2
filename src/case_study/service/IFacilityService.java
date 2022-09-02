@@ -10,4 +10,6 @@ public interface IFacilityService extends IService {
     void addHouse();
 
     void addRoom();
+
+    void deleteFacility();
 }

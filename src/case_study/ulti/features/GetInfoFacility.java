@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GetInfoFacility {
-    String serviceCode;
-    String serviceName;
-    double area;
-    double rentPrice;
-    int maxOccupancy;
-    String rentType;
-    List<Villa> villaList = new ArrayList<>();
-    List<House> houseList = new ArrayList<>();
-    List<Room> roomList = new ArrayList<>();
-    private Scanner scanner = new Scanner(System.in);
+    private static String serviceCode;
+    private static String serviceName;
+    private static double area;
+    private static double rentPrice;
+    private static int maxOccupancy;
+    private static String rentType;
+    private static Scanner scanner = new Scanner(System.in);
+    public static List<Villa> villaList = new ArrayList<>();
+    public static List<House> houseList = new ArrayList<>();
+    public static List<Room> roomList = new ArrayList<>();
 
-    public void getInfoFacility() {
+    public static void getInfoFacility() {
         System.out.println("Enter service name: ");
         serviceName = scanner.nextLine();
         System.out.println("Enter area: ");
@@ -33,7 +33,7 @@ public class GetInfoFacility {
         rentType = scanner.nextLine();
     }
 
-    public Villa getInfoVilla() {
+    public static Villa getInfoVilla() {
         getInfoFacility();
         String roomStandard;
         System.out.println("Enter room standard: ");
@@ -57,7 +57,7 @@ public class GetInfoFacility {
         return villa;
     }
 
-    public House getInfoHouse() {
+    public static House getInfoHouse() {
         getInfoFacility();
         String roomStandard;
         System.out.println("Enter room standard: ");
@@ -78,7 +78,7 @@ public class GetInfoFacility {
         return house;
     }
 
-    public Room getInfoRoom() {
+    public static Room getInfoRoom() {
         getInfoFacility();
         String freeService;
         System.out.println("Enter free service");

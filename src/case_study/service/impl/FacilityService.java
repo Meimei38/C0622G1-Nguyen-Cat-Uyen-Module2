@@ -5,6 +5,7 @@ import case_study.model.facility.House;
 import case_study.model.facility.Room;
 import case_study.model.facility.Villa;
 import case_study.service.IFacilityService;
+import case_study.ulti.features.GetInfoFacility;
 import case_study.ulti.read_write.ReadFile;
 import case_study.ulti.read_write.WriteFile;
 
@@ -37,22 +38,28 @@ public class FacilityService implements IFacilityService {
     @Override
     public void addVilla() {
         facilities = readFileFacility(FACILITY_LIST_CSV);
-
-        WriteFile.writeFile(FACILITY_LIST_CSV,convertListFacilityToListString(facilities));
+        Villa villa = GetInfoFacility.getInfoVilla();
+        facilities.add(villa);
+        System.out.println("New villa added!");
+        WriteFile.writeFile(FACILITY_LIST_CSV, convertListFacilityToListString(facilities));
     }
 
     @Override
     public void addHouse() {
         facilities = readFileFacility(FACILITY_LIST_CSV);
-
-        WriteFile.writeFile(FACILITY_LIST_CSV,convertListFacilityToListString(facilities));
+        House house = GetInfoFacility.getInfoHouse();
+        facilities.add(house);
+        System.out.println("New house added!");
+        WriteFile.writeFile(FACILITY_LIST_CSV, convertListFacilityToListString(facilities));
     }
 
     @Override
     public void addRoom() {
         facilities = readFileFacility(FACILITY_LIST_CSV);
-
-        WriteFile.writeFile(FACILITY_LIST_CSV,convertListFacilityToListString(facilities));
+        Room room = GetInfoFacility.getInfoRoom();
+        facilities.add(room);
+        System.out.println("New room added!");
+        WriteFile.writeFile(FACILITY_LIST_CSV, convertListFacilityToListString(facilities));
     }
 
     private List<Facility> readFileFacility(String src) {

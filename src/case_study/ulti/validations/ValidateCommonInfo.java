@@ -35,11 +35,11 @@ public class ValidateCommonInfo {
 
     }
 
-    public static boolean ValidatePhoneNumber(String phoneNumber) {
+    public static boolean validatePhoneNumber(String phoneNumber) {
         String phoneNumberRegex = "^[(]\\d{2}[)][-][(]\\d{9}[)]$";
         return phoneNumber.matches(phoneNumberRegex);
     }
-    public static boolean ValidateMoney(double money){
+    public static boolean validateMoney(double money){
         return (money < 0) && (money > Double.MAX_VALUE);
 
     }

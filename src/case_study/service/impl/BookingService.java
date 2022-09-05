@@ -1,30 +1,37 @@
 package case_study.service.impl;
 
 import case_study.model.Booking;
+import case_study.model.Contract;
 import case_study.model.facility.Facility;
 import case_study.model.person.Customer;
 import case_study.service.IBookingService;
-import case_study.ulti.exceptions.InvalidDateException;
-import case_study.ulti.exceptions.OverlappingPeriodException;
+import case_study.ulti.exceptions.*;
 import case_study.ulti.features.BookingCompare;
 import case_study.ulti.read_write.ReadFile;
 import case_study.ulti.read_write.WriteFile;
+import case_study.ulti.validations.ValidateCommonInfo;
 import case_study.ulti.validations.ValidateDate;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class BookingService implements IBookingService {
     public static final String BOOKING_LIST_CSV = "src\\case_study\\data\\booking_list.csv";
+    public static final String CONTRACT_LIST_CSV = "src\\case_study\\data\\contract_list.csv";
     public static BookingCompare bookingCompare = new BookingCompare();
     private static Scanner scanner = new Scanner(System.in);
     public static TreeSet<Booking> bookings = new TreeSet<>(bookingCompare);
+    public static Queue<Booking> bookingQueue = new PriorityQueue<>();
+    public static List<Contract> contracts = new ArrayList<>();
 
     @Override
     public void addBooking() {
         bookings = readFileBooking();
         Booking booking = this.getInfoBooking();
         bookings.add(booking);
+        bookingQueue.add(booking);
+        System.out.println("New booking is successfully added!");
         WriteFile.writeFile(BOOKING_LIST_CSV, convertListBookingToListString(bookings));
     }
 
@@ -38,11 +45,88 @@ public class BookingService implements IBookingService {
 
     @Override
     public void createContract() {
+        contracts = readFileContract();
+        if (bookingQueue.size() == 0) {
+            System.out.println("No booking data exists.");
+            return;
+        }
+        String bookingCode = bookingQueue.poll().getBookingCode();
 
+        double totalPayment;
+        while (true) {
+            try {
+                System.out.println("Enter total payment: ");
+                totalPayment = Double.parseDouble(scanner.nextLine());
+                if (!ValidateCommonInfo.validateMoney(totalPayment)) {
+                    throw new InvalidMoneyException("Valid amount of total payment must be in range of [0;2^63-1]");
+                }
+                break;
+            } catch (InvalidMoneyException e) {
+                System.err.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                e.getStackTrace();
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
+        //getContractCode
+        String contractCode;
+        if (contracts.size() == 0) {
+            contractCode = "CT-1";
+        } else {
+            String[] code = contracts.get(contracts.size() - 1).getContractCode().split("-");
+            int number = Integer.parseInt(code[1]);
+            contractCode = "CT-" + number;
+        }
+
+        double deposit;
+        while (true) {
+            try {
+                System.out.println("Enter deposit: ");
+                deposit = Double.parseDouble(scanner.nextLine());
+                if ((!ValidateCommonInfo.validateMoney(deposit)) && (deposit <= totalPayment)) {
+                    throw new InvalidMoneyException("Valid amount of deposit must be in range of [0;2^63-1], " +
+                            "and must be not larger than the total payment");
+                }
+                break;
+            } catch (InvalidMoneyException e) {
+                System.err.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                e.getStackTrace();
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
+        // getCustomerCode
+        CustomerService customerService = new CustomerService();
+        List<Customer> customers = customerService.readFileCustomer();
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println(i + 1 + "," + customers.get(i));
+        }
+        int choiceCustomerCode;
+        String customerCode;
+        while (true) {
+            System.out.println("Enter 1-" + customers.size());
+            choiceCustomerCode = Integer.parseInt(scanner.nextLine());
+            if (choiceCustomerCode < 0 || choiceCustomerCode > customers.size()) {
+                System.out.println("Invalid choice! Please choose again!");
+            } else {
+                customerCode = customers.get(choiceCustomerCode - 1).getCode();
+                break;
+            }
+        }
+        Contract contract = new Contract(contractCode, bookingCode, deposit, totalPayment, customerCode);
+        contracts.add(contract);
+        System.out.println("New contract is successfully added!");
+        WriteFile.writeFile(CONTRACT_LIST_CSV, convertListContractToListString(contracts));
     }
 
     @Override
     public void displayContract() {
+        contracts = readFileContract();
+        for(Contract contract:contracts){
+            System.out.println(contract);
+        }
 
     }
 
@@ -80,7 +164,9 @@ public class BookingService implements IBookingService {
                 startDate = scanner.nextLine();
                 LocalDate lcStartDate = ValidateDate.validateDateFormat(startDate);
                 if (lcStartDate == null) {
-                    throw new InvalidDateException("Invalid date. Please check the date and its format");
+                    throw new InvalidDateException("Invalid date. Please check the date and its format!");
+                } else if (!ValidateDate.validateStartDate(lcStartDate)) {
+                    throw new InvalidStartDateException("Invalid start date. Start date must be after today: " + (LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
                 } else {
                     for (Booking booking : bookings) {
                         if (serviceCode.equals(booking.getServiceCode())) {
@@ -90,8 +176,11 @@ public class BookingService implements IBookingService {
                         }
                     }
                 }
+
                 break;
             } catch (InvalidDateException e) {
+                System.err.println(e.getMessage());
+            } catch (InvalidStartDateException e) {
                 System.err.println(e.getMessage());
             } catch (OverlappingPeriodException e) {
                 System.err.println(e.getMessage());
@@ -107,7 +196,9 @@ public class BookingService implements IBookingService {
                 endDate = scanner.nextLine();
                 LocalDate lcEndDate = ValidateDate.validateDateFormat(endDate);
                 if (lcEndDate == null) {
-                    throw new InvalidDateException("Invalid date. Please check the date and its format");
+                    throw new InvalidDateException("Invalid date. Please check the date and its format!");
+                } else if (!ValidateDate.validateEndDate(startDate, lcEndDate)) {
+                    throw new InvalidEndDateException("Invalid end date. End date must be after start date!");
                 } else {
                     for (Booking booking : bookings) {
                         if (serviceCode.equals(booking.getServiceCode())) {
@@ -118,8 +209,11 @@ public class BookingService implements IBookingService {
 
                     }
                 }
+
                 break;
             } catch (InvalidDateException e) {
+                System.err.println(e.getMessage());
+            } catch (InvalidEndDateException e) {
                 System.err.println(e.getMessage());
             } catch (OverlappingPeriodException e) {
                 System.err.println(e.getMessage());
@@ -210,22 +304,40 @@ public class BookingService implements IBookingService {
                 booking = new Booking(propertiesOfBooking[0], propertiesOfBooking[1], propertiesOfBooking[2], propertiesOfBooking[3], propertiesOfBooking[4], propertiesOfBooking[5]);
                 bookings.add(booking);
             }
-
         }
         return bookings;
-
     }
 
-    private String convertBookingToString(Booking booking) {
-        return booking.getBookingCode() + "," + booking.getStartDate() + ","
-                + booking.getEndDate() + "," + booking.getCustomerCode() + ","
-                + booking.getServiceCode() + "," + booking.getServiceType();
+    private List<Contract> readFileContract() {
+        List<String> contractList = ReadFile.readFile(CONTRACT_LIST_CSV);
+        List<Contract> contracts = new ArrayList<>();
+        if (contractList.size() == 0) {
+            System.out.println("No data exists! Please add some information!");
+        } else {
+            String[] propertiesOfContract;
+            Contract contract;
+            for (int i = 0; i < contractList.size(); i++) {
+                propertiesOfContract = contractList.get(i).split(",");
+                contract = new Contract(propertiesOfContract[0], propertiesOfContract[1], Double.parseDouble(propertiesOfContract[2]), Double.parseDouble(propertiesOfContract[3]), propertiesOfContract[4]);
+                contracts.add(contract);
+            }
+        }
+        return contracts;
     }
+
 
     private List<String> convertListBookingToListString(TreeSet<Booking> bookings) {
         List<String> strings = new ArrayList<>();
         for (Booking booking : bookings) {
-            strings.add(convertBookingToString(booking));
+            strings.add(booking.getInfo());
+        }
+        return strings;
+    }
+
+    private List<String> convertListContractToListString(List<Contract> contracts) {
+        List<String> strings = new ArrayList<>();
+        for (Contract contract : contracts) {
+            strings.add(contract.getInfo());
         }
         return strings;
     }

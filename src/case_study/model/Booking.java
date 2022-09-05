@@ -81,19 +81,7 @@ public class Booking {
                 ", serviceType='" + serviceType + '\'' +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Booking booking = (Booking) o;
-        return  Objects.equals(startDate, booking.startDate) &&
-                Objects.equals(endDate, booking.endDate) &&
-                Objects.equals(serviceCode, booking.serviceCode);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(startDate, endDate, serviceCode);
+    public String getInfo(){
+        return String.format("%s,%s,%s,%s,%s,%s",bookingCode,startDate,endDate,customerCode,serviceCode,serviceType);
     }
 }

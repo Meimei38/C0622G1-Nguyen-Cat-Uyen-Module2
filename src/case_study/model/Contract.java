@@ -68,4 +68,8 @@ public class Contract {
                 ", customerCode='" + customerCode + '\'' +
                 '}';
     }
+
+    public String getInfo() {
+        return String.format("%s,%s,%f,%f,%s", getContractCode(), getBookingCode(), getDeposit(), getTotalPayment(), getCustomerCode());
+    }
 }

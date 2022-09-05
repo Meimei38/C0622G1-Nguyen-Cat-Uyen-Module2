@@ -32,4 +32,14 @@ public class ValidateDate {
         return date.isBefore(minDate) || date.isAfter(maxDate);
 
     }
+    public static boolean validateEndDate(String startDate, LocalDate endDate){
+        String pattern = "dd/MM/uuuu";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern).withResolverStyle(ResolverStyle.STRICT);
+        LocalDate lcStartDate = LocalDate.parse(startDate,formatter);
+        return endDate.isAfter(lcStartDate);
+    }
+    public static boolean validateStartDate(LocalDate startDate){
+        LocalDate now = LocalDate.now();
+        return startDate.isAfter(now);
+    }
 }

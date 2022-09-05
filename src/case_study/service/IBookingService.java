@@ -1,5 +1,7 @@
 package case_study.service;
 
+import case_study.model.Booking;
+
 public interface IBookingService extends IService {
     void addBooking();
 
@@ -10,4 +12,8 @@ public interface IBookingService extends IService {
     void displayContract();
 
     void editContract();
+
+    Booking getInfoBooking();
+
+    String getBookingCode();
 }

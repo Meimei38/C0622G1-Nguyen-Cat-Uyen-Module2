@@ -120,7 +120,7 @@ public class CustomerService implements ICustomerService {
         return scanner.nextLine();
     }
 
-    private List<Customer> readFileCustomer() {
+    public List<Customer> readFileCustomer() {
         List<String> customerList = ReadFile.readFile(CUSTOMER_LIST_CSV);
         List<Customer> customers = new ArrayList<>();
         if (customerList.size() == 0) {

@@ -9,6 +9,11 @@ public class House extends Facility {
     public House() {
     }
 
+    @Override
+    public String getInfo() {
+        return String.format("%s,%s,%f,%f,%d,%s,%s,%d",getServiceCode(),getServiceName(),getArea(),getRentPrice(),getMaxOccupancy(),getRentType(),getRoomStandard(),getNumberOfFloor());
+    }
+
     public House(String roomStandard, int numberOfFloor) {
         this.roomStandard = roomStandard;
         this.numberOfFloor = numberOfFloor;

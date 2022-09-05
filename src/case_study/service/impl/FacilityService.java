@@ -78,6 +78,7 @@ public class FacilityService implements IFacilityService {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice == 1) {
                     facilities.remove(facility);
+                    WriteFile.writeFile(FACILITY_LIST_CSV,convertListFacilityToListString(facilities));
                     System.out.println("Successfully deleted!");
                     return;
                 } else if (choice == 2) {
@@ -102,7 +103,7 @@ public class FacilityService implements IFacilityService {
         return null;
     }
 
-    private List<Facility> readFileFacility(String src) {
+    public List<Facility> readFileFacility(String src) {
         List<String> facilityList = ReadFile.readFile(src);
         List<Facility> facilities = new ArrayList<>();
         if (facilityList.size() == 0) {
@@ -131,18 +132,14 @@ public class FacilityService implements IFacilityService {
         return facilities;
     }
 
-    private String convertFacilityToString(Facility facility) {
-        return facility.getServiceCode() + "," + facility.getServiceName() + ","
-                + facility.getArea() + "," + facility.getRentPrice() + ","
-                + facility.getMaxOccupancy() + "," + facility.getRentType();
-    }
 
     private List<String> convertListFacilityToListString(List<Facility> facilities) {
         List<String> strings = new ArrayList<>();
         for (Facility facility : facilities) {
-            strings.add(convertFacilityToString(facility));
+            strings.add(facility.getInfo());
         }
         return strings;
     }
+
 
 }

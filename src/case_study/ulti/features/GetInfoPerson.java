@@ -106,7 +106,7 @@ public class GetInfoPerson {
             try {
                 System.out.println("Enter phone number (E.g.: (84)-(123456789): ");
                 phoneNumber = scanner.nextLine();
-                if (ValidateCommonInfo.ValidatePhoneNumber(phoneNumber)) {
+                if (!ValidateCommonInfo.ValidatePhoneNumber(phoneNumber)) {
                     throw new InvalidPhoneNumberException("Invalid phone number, please check and enter again!");
                 }
                 break;

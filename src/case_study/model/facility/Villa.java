@@ -10,6 +10,11 @@ public class Villa extends Facility {
     public Villa() {
     }
 
+    @Override
+    public String getInfo() {
+        return String.format("%s,%s,%f,%f,%d,%s,%s,%f,%d", getServiceCode(),getServiceName(),getArea(),getRentPrice(),getMaxOccupancy(),getRentType(),getRoomStandard(),getAreaOfPool(),getNumberOfFloor());
+    }
+
     public Villa(String roomStandard, double areaOfPool, int numberOfFloor) {
         this.roomStandard = roomStandard;
         this.areaOfPool = areaOfPool;

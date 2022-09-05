@@ -67,6 +67,7 @@ public abstract class Facility {
     public void setRentType(String rentType) {
         this.rentType = rentType;
     }
+    public abstract String getInfo();
 
     @Override
     public String toString() {

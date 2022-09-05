@@ -29,6 +29,7 @@ public class FacilityController {
                     break;
                 case 3:
                     facilityService.deleteFacility();
+                    break;
                 case 4:
                     facilityService.displayFacilityMaintenance();
                     break;

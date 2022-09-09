@@ -39,7 +39,7 @@ public class CustomerService implements ICustomerService {
             customer.setCode("CM-" + num);
         }
         customers.add(customer);
-        System.out.println("New customer is successfully added!");
+        System.out.println("New customer successfully added!");
         WriteFile.writeFile(CUSTOMER_LIST_CSV, convertListCustomerToListString(customers));
     }
 

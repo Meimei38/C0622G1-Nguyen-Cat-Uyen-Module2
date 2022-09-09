@@ -29,7 +29,7 @@ public class EmployeeService implements IEmployeeService {
             employee.setCode("EP-" + num);
         }
         employees.add(employee);
-        System.out.println("New employee is successfully added!");
+        System.out.println("New employee successfully added!");
         WriteFile.writeFile(EMPLOYEE_LIST_CSV, convertListEmployeeToListString(employees));
     }
 

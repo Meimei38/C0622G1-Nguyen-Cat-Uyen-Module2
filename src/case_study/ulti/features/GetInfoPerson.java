@@ -106,7 +106,7 @@ public class GetInfoPerson {
             try {
                 System.out.println("Enter phone number (E.g.: (84)-(123456789): ");
                 phoneNumber = scanner.nextLine();
-                if (!ValidateCommonInfo.validatePhoneNumber(phoneNumber)) {
+                if (!ValidateCommonInfo.ValidatePhoneNumber(phoneNumber)) {
                     throw new InvalidPhoneNumberException("Invalid phone number, please check and enter again!");
                 }
                 break;
@@ -201,7 +201,7 @@ public class GetInfoPerson {
             try {
                 System.out.println("Enter wage: ");
                 wage = Double.parseDouble(scanner.nextLine());
-                if (!ValidateCommonInfo.validateMoney(wage)) {
+                if (!ValidateCommonInfo.ValidateMoney(wage)) {
                     throw new InvalidMoneyException("Valid amount of money must be in range of [0;2^63-1]");
                 }
                 break;
